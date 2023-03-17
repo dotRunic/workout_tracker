@@ -85,15 +85,9 @@ public class FileUtils {
         }
     }
 
-    // private static int getNumberOfBikingWorkoutByType(List<Workout> workouts, BikingType type) {
-    //     return (int) workouts.stream().filter(BikingWorkout.class::isInstance)
-    //             .map(BikingWorkout.class::cast)
-    //             .filter(p -> type == p.getType()).count();
-    // }
-
     private static int getNumberOfBikingWorkoutByType(List<Workout> workouts, BikingType type) {
         int count = 0;
-    
+
         for (Workout workout : workouts) {
             if (workout instanceof BikingWorkout) {
                 BikingWorkout bikingWorkout = (BikingWorkout) workout;
@@ -102,38 +96,79 @@ public class FileUtils {
                 }
             }
         }
-    
+
         return count;
     }
-    
 
     private static int getNumberOfSwimmingWorkoutByType(List<Workout> workouts, SwimmingType type) {
-        return (int) workouts.stream().filter(SwimmingWorkout.class::isInstance)
-                .map(SwimmingWorkout.class::cast)
-                .filter(p -> type == p.getType()).count();
+        int count = 0;
+
+        for (Workout workout : workouts) {
+            if (workout instanceof SwimmingWorkout) {
+                SwimmingWorkout swimmingWorkout = (SwimmingWorkout) workout;
+                if (swimmingWorkout.getType() == type) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 
     private static double getAverageDurationOfWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        return workoutList.stream().filter(p -> p.getPersonId().equals(personId))
-                .mapToDouble(Workout::getDuration).average().orElse(0.0);
+        double totalDuration = 0;
+        int count = 0;
+
+        for (Workout workout : workoutList) {
+            if (workout.getPersonId().equals(personId)) {
+                totalDuration += workout.getDuration();
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return 0.0;
+        } else {
+            return totalDuration / count;
+        }
     }
 
-    private static int getNumberOfBikingWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        return (int) workoutList.stream().filter(p -> p.getPersonId().equals(personId))
-                .filter(BikingWorkout.class::isInstance).count();
+    public static int getNumberOfBikingWorkoutsForPerson(Long personId, List<Workout> workouts) {
+        int count = 0;
+        for (Workout workout : workouts) {
+            if (workout instanceof BikingWorkout && workout.getPersonId().equals(personId)) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    private static int getNumberOfSwimmingWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        return (int) workoutList.stream().filter(p -> p.getPersonId().equals(personId))
-                .filter(SwimmingWorkout.class::isInstance).count();
+    private static int getNumberOfSwimmingWorkoutsForPerson(Long personId, List<Workout> workoutList) {
+        int count = 0;
+        for (Workout workout : workoutList) {
+            if (workout instanceof SwimmingWorkout && workout.getPersonId().equals(personId)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private static double getAverageDistance(List<? extends Workout> workouts) {
-        return workouts.stream().mapToDouble(Workout::getDistance).average().orElse(0.0);
+        double sum = 0.0;
+        for (Workout workout : workouts) {
+            sum += workout.getDistance();
+        }
+        return workouts.isEmpty() ? 0.0 : sum / workouts.size();
     }
 
     private static double getAverageDuration(List<? extends Workout> workouts) {
-        return workouts.stream().mapToDouble(Workout::getDuration).average().orElse(0.0);
+        double totalDuration = 0.0;
+        int count = 0;
+        for (Workout workout : workouts) {
+            totalDuration += workout.getDuration();
+            count++;
+        }
+        return count > 0 ? totalDuration / count : 0.0;
     }
 
 }
