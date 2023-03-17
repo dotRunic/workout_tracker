@@ -1,24 +1,24 @@
 Name: Zeus Olympios (12)
-Total workouts: 16
-Total distance: 22.5
-Average distance (Biking): 17.5
-Average distance (Swimming): 27.5
+Total workouts: 4
+Total distance: 15.0
+Average distance (Biking): 15.0
+Average distance (Swimming): 0.0
 
 Name: Poseidon Neptunus (45)
-Total workouts: 16
-Total distance: 22.5
-Average distance (Biking): 17.5
-Average distance (Swimming): 27.5
+Total workouts: 4
+Total distance: 20.0
+Average distance (Biking): 20.0
+Average distance (Swimming): 0.0
 
 Name: Hades Pluto (23)
-Total workouts: 16
-Total distance: 22.5
-Average distance (Biking): 17.5
-Average distance (Swimming): 27.5
+Total workouts: 4
+Total distance: 25.0
+Average distance (Biking): 0.0
+Average distance (Swimming): 25.0
 
 Name: Apollo Apollonidis (30)
-Total workouts: 16
-Total distance: 22.5
-Average distance (Biking): 17.5
-Average distance (Swimming): 27.5
+Total workouts: 4
+Total distance: 30.0
+Average distance (Biking): 0.0
+Average distance (Swimming): 30.0
 
