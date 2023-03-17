@@ -85,11 +85,27 @@ public class FileUtils {
         }
     }
 
+    // private static int getNumberOfBikingWorkoutByType(List<Workout> workouts, BikingType type) {
+    //     return (int) workouts.stream().filter(BikingWorkout.class::isInstance)
+    //             .map(BikingWorkout.class::cast)
+    //             .filter(p -> type == p.getType()).count();
+    // }
+
     private static int getNumberOfBikingWorkoutByType(List<Workout> workouts, BikingType type) {
-        return (int) workouts.stream().filter(BikingWorkout.class::isInstance)
-                .map(BikingWorkout.class::cast)
-                .filter(p -> type == p.getType()).count();
+        int count = 0;
+    
+        for (Workout workout : workouts) {
+            if (workout instanceof BikingWorkout) {
+                BikingWorkout bikingWorkout = (BikingWorkout) workout;
+                if (bikingWorkout.getType() == type) {
+                    count++;
+                }
+            }
+        }
+    
+        return count;
     }
+    
 
     private static int getNumberOfSwimmingWorkoutByType(List<Workout> workouts, SwimmingType type) {
         return (int) workouts.stream().filter(SwimmingWorkout.class::isInstance)
