@@ -14,4 +14,8 @@ public class BikingWorkout extends Workout {
         this.bikingWorkout = bikingWorkout;
     }
 
+    public BikingType getType() {
+        return null;
+    }
+
 }

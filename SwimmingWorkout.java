@@ -14,4 +14,8 @@ public class SwimmingWorkout extends Workout {
         this.swimmingType = swimmingType;
     }
 
+    public SwimmingType getType() {
+        return null;
+    }
+
 }
