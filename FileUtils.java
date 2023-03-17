@@ -16,10 +16,11 @@ public class FileUtils {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(PATH_TO_PERSON_IMPORT));
         while ((line = bufferedReader.readLine()) != null) {
             String[] data = line.split(";");
-            String Firstname = data[0];
-            String Lastname = data[1];
-            int Age = Integer.parseInt(data[2]);
-            Person person = new Person(null, Firstname, Lastname, Age);
+            Long id = Long.parseLong(data[0]);
+            String firstName = data[1];
+            String lastName = data[2];
+            int Age = Integer.parseInt(data[3]);
+            Person person = new Person(id, firstName, lastName, Age);
 
             personList.add(person);
         }
@@ -106,7 +107,7 @@ public class FileUtils {
         for (Workout workout : workouts) {
             if (workout instanceof SwimmingWorkout) {
                 SwimmingWorkout swimmingWorkout = (SwimmingWorkout) workout;
-                if (swimmingWorkout.getType() == type) {
+                if (swimmingWorkout.getSwimmingType() == type) {
                     count++;
                 }
             }

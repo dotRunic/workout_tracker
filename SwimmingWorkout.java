@@ -2,7 +2,7 @@ public class SwimmingWorkout extends Workout {
 
     private SwimmingType swimmingType;
 
-    public SwimmingWorkout(Long id, int duration, int distance, Long personId, SwimmingType backstroke) {
+    public SwimmingWorkout(Long id, int duration, int distance, Long personId, SwimmingType swimmingType) {
         super(id, duration, distance, personId);
     }
 
@@ -12,10 +12,6 @@ public class SwimmingWorkout extends Workout {
 
     public void setSwimmingType(SwimmingType swimmingType) {
         this.swimmingType = swimmingType;
-    }
-
-    public SwimmingType getType() {
-        return null;
     }
 
 }
