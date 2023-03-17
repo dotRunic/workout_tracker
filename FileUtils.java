@@ -38,7 +38,7 @@ public class FileUtils {
                         personWorkouts.add(workout);
                     }
                 }
-                writer.println("Name: " + person.getFirstName() + " (" + person.getAge() + ")");
+                writer.println("Name: " + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + ")");
                 writer.println("Total workouts: " + personWorkouts.size());
                 writer.println("Total distance: " + getAverageDistance(personWorkouts));
                 writer.println("Average distance (Biking): " + getAverageDistanceByWorkout(personWorkouts, BikingWorkout.class));
@@ -49,87 +49,48 @@ public class FileUtils {
     }
 
     private static double getAverageDistanceByWorkout(List<Workout> workouts, Class<?> workout) {
-        if (workouts != null && !workouts.isEmpty() && workout != null) {
-            return getAverageDistanceByWorkout(workouts.stream().filter(workout::isInstance).toList(), workout);
-        }
-        return 0.0;
+        return workouts.stream().filter(workout::isInstance)
+            .mapToDouble(Workout::getDistance).average().orElse(0.0);
     }
-
+    
     private static double getAverageDurationByWorkout(List<Workout> workouts, Class<?> workout) {
-        if (workouts != null && !workouts.isEmpty() && workout != null) {
-            return getAverageDurationByWorkout(workouts.stream().filter(workout::isInstance).toList(), workout);
-        }
-        return 0.0;
+        return workouts.stream().filter(workout::isInstance)
+            .mapToDouble(Workout::getDuration).average().orElse(0.0);
     }
-
+    
     private static int getNumberOfBikingWorkoutByType(List<Workout> workouts, BikingType type) {
-        if (workouts != null && !workouts.isEmpty() && type != null) {
-            return workouts.stream()
-                    .filter(BikingWorkout.class::isInstance)
-                    .map(BikingWorkout.class::cast)
-                    .filter(p -> type == p.getType())
-                    .toList().size();
-        }
-        return 0;
+        return (int) workouts.stream().filter(BikingWorkout.class::isInstance)
+            .map(BikingWorkout.class::cast)
+            .filter(p -> type == p.getType()).count();
     }
-
+    
     private static int getNumberOfSwimmingWorkoutByType(List<Workout> workouts, SwimmingType type) {
-        if (workouts != null && !workouts.isEmpty() && type != null) {
-            return workouts.stream()
-                    .filter(SwimmingWorkout.class::isInstance)
-                    .map(SwimmingWorkout.class::cast)
-                    .filter(p -> type == p.getType())
-                    .toList().size();
-        }
-        return 0;
+        return (int) workouts.stream().filter(SwimmingWorkout.class::isInstance)
+            .map(SwimmingWorkout.class::cast)
+            .filter(p -> type == p.getType()).count();
     }
-
+    
     private static double getAverageDurationOfWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        if (personId != null && workoutList != null && !workoutList.isEmpty()) {
-            return getAverageDurationOfWorkoutByPerson(personId, workoutList.stream()
-                    .filter(p -> p.getPersonId().equals(personId))
-                    .toList());
-        }
-        return 0;
+        return workoutList.stream().filter(p -> p.getPersonId().equals(personId))
+            .mapToDouble(Workout::getDuration).average().orElse(0.0);
     }
-
+    
     private static int getNumberOfBikingWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        if (personId != null && workoutList != null && !workoutList.isEmpty()) {
-            return workoutList.stream()
-                    .filter(p -> p.getPersonId().equals(personId))
-                    .filter(BikingWorkout.class::isInstance)
-                    .toList().size();
-        }
-        return 0;
+        return (int) workoutList.stream().filter(p -> p.getPersonId().equals(personId))
+            .filter(BikingWorkout.class::isInstance).count();
     }
-
+    
     private static int getNumberOfSwimmingWorkoutByPerson(Long personId, List<Workout> workoutList) {
-        if (personId != null && workoutList != null && !workoutList.isEmpty()) {
-            return workoutList.stream()
-                    .filter(p -> p.getPersonId().equals(personId))
-                    .filter(SwimmingWorkout.class::isInstance)
-                    .toList().size();
-        }
-        return 0;
+        return (int) workoutList.stream().filter(p -> p.getPersonId().equals(personId))
+            .filter(SwimmingWorkout.class::isInstance).count();
     }
-
+    
     private static double getAverageDistance(List<? extends Workout> workouts) {
-        if (workouts != null && !workouts.isEmpty()) {
-            return workouts.stream()
-
-                    .mapToDouble(Workout::getDistance)
-                    .average().orElse(0.0);
-        }
-        return 0.0;
+        return workouts.stream().mapToDouble(Workout::getDistance).average().orElse(0.0);
     }
-
+    
     private static double getAverageDuration(List<? extends Workout> workouts) {
-        if (workouts != null && !workouts.isEmpty()) {
-            return workouts.stream()
-                    .mapToDouble(Workout::getDuration)
-                    .average().orElse(0.0);
-        }
-        return 0.0;
+        return workouts.stream().mapToDouble(Workout::getDuration).average().orElse(0.0);
     }
-
+    
 }
