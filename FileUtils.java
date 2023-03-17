@@ -105,4 +105,23 @@ public class FileUtils {
         return 0;
     }
 
+    private static double getAverageDistance(List<? extends Workout> workouts) {
+        if (workouts != null && !workouts.isEmpty()) {
+            return workouts.stream()
+
+                    .mapToDouble(Workout::getDistance)
+                    .average().orElse(0.0);
+        }
+        return 0.0;
+    }
+
+    private static double getAverageDuration(List<? extends Workout> workouts) {
+        if (workouts != null && !workouts.isEmpty()) {
+            return workouts.stream()
+                    .mapToDouble(Workout::getDuration)
+                    .average().orElse(0.0);
+        }
+        return 0.0;
+    }
+
 }
