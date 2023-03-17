@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,18 +25,17 @@ public class FileUtils {
 
             personList.add(person);
         }
-
-        File file = new File(PATH_TO_STATISTIC);
-        FileWriter fileWriter = new FileWriter(file);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-
-        for(Person person : personList) {
-            printWriter.println(person.getFirstName() + " " + person.getLastName() + " " + person.getAge());
-        }
-        
-        return personList;
+        bufferedReader.close();
+        return personList;  
     }
 
-    
-
+    public static void writeStatisticsToFile(List<Person> personList) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_STATISTIC));
+        for (Person person : personList) {
+            writer.write("Name:" + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + (") "));
+            writer.newLine();
+            writer.newLine();
+        }
+        writer.close();
+    }
 }
