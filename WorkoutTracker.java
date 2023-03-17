@@ -4,13 +4,7 @@ import java.util.ArrayList;
 
 public class WorkoutTracker {
     public static void main(String[] args) throws IOException {
-        // try {
-        // List<Person> personList = FileUtils.readPersonsFromCsv();
-        // FileUtils.writeStatisticsToFile(personList);
-        // } catch (IOException e) {
-        // System.out.println("Error reading persons from CSV: " + e.getMessage());
-        // }
-        
+
         List<Person> people = FileUtils.readPersonsFromCsv();
         List<Workout> workouts = new ArrayList<>();
         people.forEach(p -> {

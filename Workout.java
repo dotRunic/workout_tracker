@@ -4,12 +4,16 @@ abstract class Workout {
     private int distance;
     private Long personId;
 
+// Constructor
+
     public Workout(Long id, int duration, int distance, Long personId) {
         this.id = id;
         this.duration = duration;
         this.distance = distance;
         this.personId = personId;
     }
+
+// Getters / Setters 
 
     public Long getId() {
         return this.id;
