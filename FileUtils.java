@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class FileUtils {
     private final static String PATH_TO_PERSON_IMPORT = "resource/person.csv";
@@ -21,7 +24,18 @@ public class FileUtils {
 
             personList.add(person);
         }
+
+        File file = new File(PATH_TO_STATISTIC);
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        for(Person person : personList) {
+            printWriter.println(person.getFirstName() + " " + person.getLastName() + " " + person.getAge());
+        }
+        
         return personList;
     }
+
+    
 
 }
