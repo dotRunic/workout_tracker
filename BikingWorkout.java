@@ -2,7 +2,7 @@ public class BikingWorkout extends Workout {
 
     private BikingWorkout bikingWorkout;
 
-    public BikingWorkout(Long id, int duration, int distance, Long personId) {
+    public BikingWorkout(Long id, int duration, int distance, Long personId, BikingType mountain) {
         super(id, duration, distance, personId);
     }
 

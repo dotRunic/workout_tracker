@@ -29,15 +29,23 @@ public class FileUtils {
         return personList;
     }
 
-    public static void writeStatisticsToFile(List<Person> personList) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_STATISTIC));
-        for (Person person : personList) {
-            writer.write(
-                    "Name:" + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + (") "));
-            writer.newLine();
-            writer.newLine();
+    public static void writeStatisticToFile(List<Person> people, List<Workout> workouts) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(PATH_TO_STATISTIC))) {
+            for (Person person : people) {
+                List<Workout> personWorkouts = new ArrayList<>();
+                for (Workout workout : workouts) {
+                    if (workout.getPersonId() == person.getId()) {
+                        personWorkouts.add(workout);
+                    }
+                }
+                writer.println("Name: " + person.getFirstName() + " (" + person.getAge() + ")");
+                writer.println("Total workouts: " + personWorkouts.size());
+                writer.println("Total distance: " + getAverageDistance(personWorkouts));
+                writer.println("Average distance (Biking): " + getAverageDistanceByWorkout(personWorkouts, BikingWorkout.class));
+                writer.println("Average distance (Swimming): " + getAverageDistanceByWorkout(personWorkouts, SwimmingWorkout.class));
+                writer.println();
+            }
         }
-        writer.close();
     }
 
     private static double getAverageDistanceByWorkout(List<Workout> workouts, Class<?> workout) {

@@ -2,7 +2,7 @@ public class SwimmingWorkout extends Workout {
 
     private SwimmingType swimmingType;
 
-    public SwimmingWorkout(Long id, int duration, int distance, Long personId) {
+    public SwimmingWorkout(Long id, int duration, int distance, Long personId, SwimmingType backstroke) {
         super(id, duration, distance, personId);
     }
 
