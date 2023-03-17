@@ -4,7 +4,6 @@ public class BikingWorkout extends Workout {
 
     public BikingWorkout(Long id, int duration, int distance, Long personId) {
         super(id, duration, distance, personId);
-        // TODO Auto-generated constructor stub
     }
 
     public BikingWorkout getBikingWorkout() {
