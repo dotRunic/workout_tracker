@@ -1,21 +1,18 @@
 public class BikingWorkout extends Workout {
 
-    private BikingWorkout bikingWorkout;
+    private BikingType bikingType;
 
-    public BikingWorkout(Long id, int duration, int distance, Long personId, BikingType mountain) {
+    public BikingWorkout(Long id, int duration, int distance, Long personId, BikingType bikingType) {
         super(id, duration, distance, personId);
+        this.bikingType = bikingType;
     }
 
-    public BikingWorkout getBikingWorkout() {
-        return this.bikingWorkout;
+    public BikingType getBikingType() {
+        return this.bikingType;
     }
 
-    public void setBikingWorkout(BikingWorkout bikingWorkout) {
-        this.bikingWorkout = bikingWorkout;
-    }
-
-    public BikingType getType() {
-        return null;
+    public void setBikingType(BikingType bikingType) {
+        this.bikingType = bikingType;
     }
 
 }

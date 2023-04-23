@@ -4,6 +4,7 @@ public class SwimmingWorkout extends Workout {
 
     public SwimmingWorkout(Long id, int duration, int distance, Long personId, SwimmingType swimmingType) {
         super(id, duration, distance, personId);
+        this.swimmingType = swimmingType;
     }
 
     public SwimmingType getSwimmingType() {
