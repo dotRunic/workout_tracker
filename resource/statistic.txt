@@ -2,33 +2,39 @@
 Name: Poseidon Neptunus (45)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
-Average duration: 69min 
+Average duration: 69min
+
 - - - - - Person ( 2 ) - - - - -
 Name: Hades Pluto (23)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
-Average duration: 61min 
+Average duration: 61min
+
 - - - - - Person ( 3 ) - - - - -
 Name: Apollo Apollonidis (30)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 2
-Average duration: 10min 
+Average duration: 10min
+
 - - - - - Person ( 4 ) - - - - -
 Name: Coffee addict (12)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 4
-Average duration: 32min 
+Average duration: 32min
+
 - - - - - Person ( 5 ) - - - - -
 Name: Zeus Olympios (12)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
-Average duration: 15min 
+Average duration: 15min
+
 - - - - - Statistics - - - - - - 
 - - - - - Biking - - - - - - - - 
 Average duration: 25min
 Average distance: 57m
 - MOUNTAIN: 5
 - ROAD: 5
+
 - - - - - Swimming - - - - - - 
 Average duration: 47min
 Average distance: 72m
