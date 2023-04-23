@@ -25,7 +25,7 @@ public class WorkoutTracker {
         workouts.add(new BikingWorkout(1L, 1, 205, 3L, BikingType.ROAD));
         workouts.add(new SwimmingWorkout(2L, 15, 335, 3L, SwimmingType.BACKSTROKE));
         workouts.add(new SwimmingWorkout(3L, 20, 45, 3L, SwimmingType.BUTTERFLY));
-        workouts.add(new SwimmingWorkout(4L, 12, 55, 4L, SwimmingType.BUTTERFLY));
+        workouts.add(new SwimmingWorkout(4L, 12, 55, 3L, SwimmingType.BUTTERFLY));
 
         workouts.add(new BikingWorkout(0L, 7, 15, 4L, BikingType.MOUNTAIN));
         workouts.add(new SwimmingWorkout(3L, 49, 45, 4L, SwimmingType.BUTTERFLY));

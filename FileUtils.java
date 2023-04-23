@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class FileUtils {
 
@@ -29,7 +29,8 @@ public class FileUtils {
 
     private int getNumberOfSwimmingWorkoutsByPerson(Long personId, List<Workout> workoutList) {
         int count = 0;
-        for (Workout workout : workoutList) {
+        for (int i = 0; i < workoutList.size(); i++) {
+            Workout workout = workoutList.get(i);
             if (workout.getPersonId() == personId && workout instanceof SwimmingWorkout) {
                 count++;
             }
@@ -47,17 +48,17 @@ public class FileUtils {
         }
         return count;
     }
-    
+
     private int getNumberOfBikingWorkoutsByPerson(Long personId, List<Workout> workoutList) {
         int count = 0;
-        for (Workout workout : workoutList) {
+        for (int i = 0; i < workoutList.size(); i++) {
+            Workout workout = workoutList.get(i);
             if (workout.getPersonId() == personId && workout instanceof BikingWorkout) {
                 count++;
             }
         }
         return count;
     }
-
 
     private double getAverageDistance(List<? extends Workout> workouts) {
         int totalDistance = 0;
@@ -91,20 +92,23 @@ public class FileUtils {
     
         return totalDuration / (double) count;
     }
-    
+   
     private double getAverageDurationOfWorkoutByPerson(Long id, List<Workout> workoutList,
-            Class<? extends Workout> workoutClass) {
-        double sum = 0;
-        int count = 0;
-        for (Workout workout : workoutList) {
+        Class<? extends Workout> workoutClass) {
+    double sum = 0;
+    int count = 0;
+    for (int i = 0; i < workoutList.size(); i++) {
+        Workout workout = workoutList.get(i);
+        if (workout.getPersonId() == id && workoutClass.isInstance(workout)) {
             sum += workout.getDuration();
             count++;
         }
-        if (count == 0) {
-            return 0;
-        }
-        return sum / count;
     }
+    if (count == 0) {
+        return 0;
+    }
+    return sum / count;
+}
     
     public List<Person> readPersonsFromCSV() throws IOException {
         List<Person> persons = new ArrayList<>();
@@ -143,52 +147,50 @@ public class FileUtils {
     public void writeStatisticsToFile(List<Person> persons, List<Workout> workouts) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(PATH_TO_STATISTIC))) {
             for (Person person : persons) {
-                List<Workout> personWorkouts = workouts.stream()
-                        .filter(workout -> workout.getPersonId() == person.getId())
-                        .collect(Collectors.toList());
-
+                List<Workout> personWorkouts = new ArrayList<>();
+                for (Workout workout : workouts) {
+                    if (workout.getPersonId() == person.getId()) {
+                        personWorkouts.add(workout);
+                    }
+                }
+    
                 writer.write("- - - - - Person ( " + person.getId() + " ) - - - - -\n");
-                writer.write(
-                        "Name: " + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + ")\n");
-                writer.write("Number of Biking Workouts: "
-                        + getNumberOfBikingWorkoutsByPerson(person.getId(), personWorkouts) + "\n");
-                writer.write("Number of Swimming Workouts: "
-                        + getNumberOfSwimmingWorkoutsByPerson(person.getId(), personWorkouts) + "\n");
-                writer.write("Average duration: "
-                        + String.format("%.0f",
-                                getAverageDurationOfWorkoutByPerson(person.getId(), personWorkouts, Workout.class))
-                        + "min\n");
-
+                writer.write("Name: " + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + ")\n");
+                writer.write("Number of Biking Workouts: " + getNumberOfBikingWorkoutsByPerson(person.getId(), personWorkouts) + "\n");
+                writer.write("Number of Swimming Workouts: " + getNumberOfSwimmingWorkoutsByPerson(person.getId(), personWorkouts) + "\n");
+                writer.write("Average duration: " + String.format("%.0f", getAverageDurationOfWorkoutByPerson(person.getId(), personWorkouts, Workout.class)) + "min\n");
+    
                 writer.newLine();
             }
-
+    
             writer.write("- - - - - Statistics - - - - - - \n");
             writer.write("- - - - - Biking - - - - - - - - \n");
-            List<BikingWorkout> bikingWorkouts = workouts.stream()
-                    .filter(workout -> workout instanceof BikingWorkout)
-                    .map(workout -> (BikingWorkout) workout)
-                    .collect(Collectors.toList());
-
+            List<BikingWorkout> bikingWorkouts = new ArrayList<>();
+            for (Workout workout : workouts) {
+                if (workout instanceof BikingWorkout) {
+                    bikingWorkouts.add((BikingWorkout) workout);
+                }
+            }
             writer.write("Average duration: " + String.format("%.0f", getAverageDuration(bikingWorkouts)) + "min\n");
             writer.write("Average distance: " + String.format("%.0f", getAverageDistance(bikingWorkouts)) + "m\n");
             writer.write("- MOUNTAIN: " + getNumberOfBikingWorkoutsByType(bikingWorkouts, BikingType.MOUNTAIN) + "\n");
             writer.write("- ROAD: " + getNumberOfBikingWorkoutsByType(bikingWorkouts, BikingType.ROAD) + "\n\n");
-
+    
             writer.write("- - - - - Swimming - - - - - - \n");
-            List<SwimmingWorkout> swimmingWorkouts = workouts.stream()
-                    .filter(workout -> workout instanceof SwimmingWorkout)
-                    .map(workout -> (SwimmingWorkout) workout)
-                    .collect(Collectors.toList());
-
+            List<SwimmingWorkout> swimmingWorkouts = new ArrayList<>();
+            for (Workout workout : workouts) {
+                if (workout instanceof SwimmingWorkout) {
+                    swimmingWorkouts.add((SwimmingWorkout) workout);
+                }
+            }
             writer.write("Average duration: " + String.format("%.0f", getAverageDuration(swimmingWorkouts)) + "min\n");
             writer.write("Average distance: " + String.format("%.0f", getAverageDistance(swimmingWorkouts)) + "m\n");
-            writer.write("- BACKSTROKE: " + getNumberOfSwimmingWorkoutsByType(swimmingWorkouts, SwimmingType.BACKSTROKE)
-                    + "\n");
-            writer.write("- BUTTERFLY: " + getNumberOfSwimmingWorkoutsByType(swimmingWorkouts, SwimmingType.BUTTERFLY)
-                    + "\n");
+            writer.write("- BACKSTROKE: " + getNumberOfSwimmingWorkoutsByType(swimmingWorkouts, SwimmingType.BACKSTROKE) + "\n");
+            writer.write("- BUTTERFLY: " + getNumberOfSwimmingWorkoutsByType(swimmingWorkouts, SwimmingType.BUTTERFLY) + "\n");
         } catch (IOException e) {
-            throw new IOException("Failed to write statistics file: " + e.getMessage());
+            throw new IOException();
         }
     }
+    
 
 }
