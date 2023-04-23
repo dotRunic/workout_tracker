@@ -1,43 +1,36 @@
-----------Person 1----------
+- - - - - Person ( 1 ) - - - - -
 Name: Poseidon Neptunus (45)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
-Average duration: 68min 
- 
-----------Person 2----------
+Average duration: 69min 
+- - - - - Person ( 2 ) - - - - -
 Name: Hades Pluto (23)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
-Average duration: 15min 
- 
-----------Person 3----------
+Average duration: 61min 
+- - - - - Person ( 3 ) - - - - -
 Name: Apollo Apollonidis (30)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 2
-Average duration: 13min 
- 
-----------Person 4----------
+Average duration: 10min 
+- - - - - Person ( 4 ) - - - - -
 Name: Coffee addict (12)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 4
-Average duration: 17min 
- 
-----------Person 5----------
+Average duration: 32min 
+- - - - - Person ( 5 ) - - - - -
 Name: Zeus Olympios (12)
 Number of Biking Workouts: 2
 Number of Swimming Workouts: 3
 Average duration: 15min 
- 
-----------Statistics----------
-----------Biking----------
-Average duration: 8min
-Average distance: 20m
-# MOUNTAIN: 5
-# ROAD: 5
-
-----------Swimming----------
-Average duration: 38min
-Average distance: 45m
-# BACKSTROKE: 5
-# BUTTERFLY: 10
-
+- - - - - Statistics - - - - - - 
+- - - - - Biking - - - - - - - - 
+Average duration: 25min
+Average distance: 57m
+- MOUNTAIN: 5
+- ROAD: 5
+- - - - - Swimming - - - - - - 
+Average duration: 47min
+Average distance: 72m
+- BACKSTROKE: 5
+- BUTTERFLY: 10

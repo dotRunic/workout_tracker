@@ -113,7 +113,7 @@ public class FileUtils {
                     }
                 }
                 allWorkouts.addAll(personWorkouts);
-                bufferedWriter.write("----------Person " + person.getId() + "----------\n");
+                bufferedWriter.write("- - - - - Person ( " + person.getId() + " ) - - - - -\n");
                 bufferedWriter.write(
                         "Name: " + person.getFirstName() + " " + person.getLastName() + " (" + person.getAge() + ")\n");
                 bufferedWriter.write("Number of Biking Workouts: "
@@ -125,11 +125,12 @@ public class FileUtils {
                 double averageDuration = getAverageDurationOfWorkoutByPerson(person.getId(), personWorkouts,
                         Workout.class);
                 String formattedDuration = String.format("%.0f", averageDuration);
-                bufferedWriter.write("Average duration: " + formattedDuration + "min \n \n");
-
+                bufferedWriter.write("Average duration: " + formattedDuration + "min \n");
             }
-            bufferedWriter.write("----------Statistics----------\n");
-            bufferedWriter.write("----------Biking----------\n");
+
+            bufferedWriter.write("- - - - - Statistics - - - - - - \n");
+            bufferedWriter.write("- - - - - Biking - - - - - - - - \n");
+
             double averageDurationBiking = getAverageDuration(
                     allWorkouts.stream().filter(w -> w instanceof BikingWorkout).collect(Collectors.toList()));
             String formattedDurationBiking = String.format("%.0f", averageDurationBiking);
@@ -141,22 +142,21 @@ public class FileUtils {
             bufferedWriter.write("Average distance: " + formattedDistanceBiking + "m");
             bufferedWriter.newLine();
             bufferedWriter
-                    .write("# MOUNTAIN: "
+                    .write("- MOUNTAIN: "
                             + getNumberOfBikingWorkoutsByType(
                                     allWorkouts.stream().filter(w -> w instanceof BikingWorkout)
                                             .map(BikingWorkout.class::cast).collect(Collectors.toList()),
                                     BikingType.MOUNTAIN));
             bufferedWriter.newLine();
             bufferedWriter
-                    .write("# ROAD: "
+                    .write("- ROAD: "
                             + getNumberOfBikingWorkoutsByType(
                                     allWorkouts.stream().filter(w -> w instanceof BikingWorkout)
                                             .map(BikingWorkout.class::cast).collect(Collectors.toList()),
                                     BikingType.ROAD));
             bufferedWriter.newLine();
-            bufferedWriter.newLine();
-
-            bufferedWriter.write("----------Swimming----------\n");
+            
+            bufferedWriter.write("- - - - - Swimming - - - - - - \n");
             double averageDurationSwimming = getAverageDuration(
                     allWorkouts.stream().filter(w -> w instanceof SwimmingWorkout).collect(Collectors.toList()));
             String formattedDurationSwimming = String.format("%.0f", averageDurationSwimming);
@@ -168,17 +168,16 @@ public class FileUtils {
             bufferedWriter.write("Average distance: " + formattedDistanceSwimming + "m");
             bufferedWriter.newLine();
             bufferedWriter
-                    .write("# BACKSTROKE: " + getNumberOfSwimmingWorkoutsByType(
+                    .write("- BACKSTROKE: " + getNumberOfSwimmingWorkoutsByType(
                             allWorkouts.stream().filter(w -> w instanceof SwimmingWorkout)
                                     .map(SwimmingWorkout.class::cast).collect(Collectors.toList()),
                             SwimmingType.BACKSTROKE));
             bufferedWriter.newLine();
             bufferedWriter
-                    .write("# BUTTERFLY: " + getNumberOfSwimmingWorkoutsByType(
+                    .write("- BUTTERFLY: " + getNumberOfSwimmingWorkoutsByType(
                             allWorkouts.stream().filter(w -> w instanceof SwimmingWorkout)
                                     .map(SwimmingWorkout.class::cast).collect(Collectors.toList()),
                             SwimmingType.BUTTERFLY));
-            bufferedWriter.newLine();
             bufferedWriter.newLine();
         }
     }
